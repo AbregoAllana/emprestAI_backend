@@ -1,6 +1,9 @@
 # PRD — Empréstimo de Equipamentos Internos
 Versão 1 · escrito pelo time de Operações
 
+> Este PRD também está espelhado no repositório do frontend
+> (`emprestAI_frontend/docs/PRD.md`). Alterações devem ser feitas nos dois.
+
 ## Problema
 O controle de quem pegou qual equipamento (notebooks, monitores,
 cabos, câmeras) é feito hoje numa planilha compartilhada. Ninguém
