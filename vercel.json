@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "buildCommand": "npm run prisma:generate && npm run build",
+  "functions": {
+    "api/index.ts": {
+      "runtime": "nodejs22.x",
+      "includeFiles": ["prisma/**"]
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api"
+    }
+  ]
+}
