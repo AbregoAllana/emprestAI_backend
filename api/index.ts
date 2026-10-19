@@ -1,13 +1,13 @@
-import serverlessExpress from '@vendia/serverless-express'
-import type { Handler } from 'aws-lambda'
+import type { Request, Response } from 'express'
+import type { INestApplication } from '@nestjs/common'
 import { createApp } from '../src/app'
 
-let cachedHandler: Handler | undefined
+let cachedApp: INestApplication | undefined
 
-export default async function handler(...args: Parameters<Handler>): Promise<unknown> {
-  if (!cachedHandler) {
-    const app = await createApp()
-    cachedHandler = serverlessExpress({ app: app.getHttpAdapter().getInstance() })
+export default async function handler(req: Request, res: Response): Promise<void> {
+  if (!cachedApp) {
+    cachedApp = await createApp()
   }
-  return cachedHandler(...args)
+
+  cachedApp.getHttpAdapter().getInstance()(req, res)
 }
