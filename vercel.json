@@ -4,7 +4,7 @@
   "functions": {
     "api/index.ts": {
       "runtime": "nodejs22.x",
-      "includeFiles": ["prisma/**"]
+      "includeFiles": "prisma/**"
     }
   },
   "rewrites": [
