@@ -1,12 +1,18 @@
 import type { Request, Response } from 'express'
 import type { INestApplication } from '@nestjs/common'
-import { createApp } from '../src/app'
 
 let cachedApp: INestApplication | undefined
 
 export default async function handler(req: Request, res: Response): Promise<void> {
   try {
+    const path = req.path ?? req.url?.split('?')[0] ?? ''
+    if (path.endsWith('/v1/health')) {
+      res.status(200).json({ status: 'ok' })
+      return
+    }
+
     if (!cachedApp) {
+      const { createApp } = await import('../src/app')
       cachedApp = await createApp()
     }
 
