@@ -5,9 +5,20 @@ import { createApp } from '../src/app'
 let cachedApp: INestApplication | undefined
 
 export default async function handler(req: Request, res: Response): Promise<void> {
-  if (!cachedApp) {
-    cachedApp = await createApp()
-  }
+  try {
+    if (!cachedApp) {
+      cachedApp = await createApp()
+    }
 
-  cachedApp.getHttpAdapter().getInstance()(req, res)
+    cachedApp.getHttpAdapter().getInstance()(req, res)
+  } catch (error) {
+    console.error('Failed to initialize API', error)
+    if (!res.headersSent) {
+      res.status(503).json({
+        type: 'https://emprestai.dev/problems/service-unavailable',
+        title: 'Serviço indisponível',
+        status: 503,
+      })
+    }
+  }
 }
