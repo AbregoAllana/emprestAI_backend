@@ -16,7 +16,8 @@ npm run prisma:seed
 npm run start:dev
 ```
 
-A API expõe `GET /v1/health`, `GET /v1/equipment`, `POST /v1/loans/:equipmentId`
+A API expõe `GET /v1/health` (liveness), `GET /v1/health/ready` (banco),
+`GET /v1/equipment`, `POST /v1/loans/:equipmentId`
 e `POST /v1/loans/:loanId/return`. O catálogo e empréstimos exigem um JWT
 válido do Supabase e uma membership no tenant.
 
