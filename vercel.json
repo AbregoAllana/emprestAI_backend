@@ -1,16 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "npm run prisma:generate && npm run build",
-  "outputDirectory": "dist",
-  "functions": {
-    "api/index.ts": {
-      "includeFiles": "prisma/**"
-    }
-  },
-  "rewrites": [
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/api"
+      "src": "api/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.ts"
     }
   ]
 }
